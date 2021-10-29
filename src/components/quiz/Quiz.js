@@ -4,6 +4,8 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Question from "./Question";
 import "./Quiz.css";
 import { Typography } from "@mui/material";
+import useAuthContext from "../../hooks/useAuthContext";
+import { getUser } from "../../Controller";
 const Quiz = () => {
   const {
     question,
@@ -16,7 +18,7 @@ const Quiz = () => {
     categorie,
     setCurrentQuestion,
   } = useQuestionContext();
-
+  const { user } = useAuthContext();
   useEffect(() => {
     setAnswers(
       question &&
@@ -25,12 +27,13 @@ const Quiz = () => {
           ...question[currentQuestion]?.incorect_answers,
         ])
     );
+    getUser();
   }, [question, currentQuestion]);
   const handleShuffle = (options) => {
     return options.sort(() => Math.random() - 0.5);
   };
-  console.log(question);
-  console.log(answers);
+  // console.log(question);
+  // console.log(answers);
   return (
     <div>
       {question ? (
@@ -47,7 +50,9 @@ const Quiz = () => {
             <Typography>
               Difficulty: {question[currentQuestion].difficulty}
             </Typography>
-            <Typography>Score: {score}</Typography>
+            <Typography>Score: {user.score && user.score}</Typography>
+            <Typography> Current Score: {score}</Typography>
+
             <Typography>
               Total: {currentQuestion}/{question.length}
             </Typography>

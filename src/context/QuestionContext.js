@@ -18,7 +18,7 @@ export const QuestionController = (props) => {
   const getQuestion = async () => {
     await axios
       .get(
-        `http://localhost:3000/questions/${categorie && categorie}/${
+        `http://localhost:3002/questions/${categorie && categorie}/${
           dificulty && dificulty
         }`
       )

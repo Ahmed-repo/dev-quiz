@@ -39,7 +39,8 @@ const theme = createTheme();
 export default function SignInSide() {
   let history = useHistory();
 
-  const { login, errorMessageLogin } = useAuthContext();
+  const { login, errorMessageLogin, setErrorMessageLogin, isLoggedIn, user } =
+    useAuthContext();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -54,7 +55,9 @@ export default function SignInSide() {
       email: data.get("email"),
       password: data.get("password"),
     });
-    !errorMessageLogin && history.push("/");
+    // {
+    //   user && history.push("/") && setErrorMessageLogin(null);
+    // }
   };
 
   return (

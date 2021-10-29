@@ -1,11 +1,12 @@
 import { Button } from "@mui/material";
 import React, { useState } from "react";
 import { useHistory } from "react-router";
-import useQuestionContext from "../hooks/useQuestionContext";
-import Category from "./questions/Category";
-import SelectMessage from "./quiz/SelectMessage";
-import "./HomePage.css";
-const Homepage = () => {
+import useQuestionContext from "../../hooks/useQuestionContext";
+import Category from "./Category";
+import SelectMessage from "../quiz/SelectMessage";
+import useAuthContext from "../../hooks/useAuthContext";
+import "./Categories.css";
+const Categories = () => {
   const {
     question,
     setQuestion,
@@ -14,7 +15,7 @@ const Homepage = () => {
     dificulty,
     setDificulty,
   } = useQuestionContext();
-
+  const { user } = useAuthContext();
   const [check, setCheck] = useState(false);
   let history = useHistory();
   const handleClick = () => {
@@ -28,6 +29,7 @@ const Homepage = () => {
   console.log(categorie);
   console.log(question);
   console.log(dificulty);
+  console.log(user);
   return (
     <div id="container">
       <div>
@@ -71,4 +73,4 @@ const Homepage = () => {
   );
 };
 
-export default Homepage;
+export default Categories;

@@ -1,9 +1,13 @@
 import { Button } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
+import { getUser, updateUser } from "../../Controller";
+import useAuthContext from "../../hooks/useAuthContext";
+
 import useQuestionContext from "../../hooks/useQuestionContext";
 import "./Question.css";
 import SelectMessage from "./SelectMessage";
+const queryString = require("query-string");
 const Question = () => {
   const {
     question,
@@ -15,12 +19,18 @@ const Question = () => {
     currentQuestion,
     setCurrentQuestion,
   } = useQuestionContext();
+  const { user, setUser, getUserWithToken } = useAuthContext();
   const [selected, setSelected] = useState();
   const [skipped, setSkipped] = useState([]);
   const [skip, setSkip] = useState(false);
   const [check, setCheck] = useState(false);
   const rightAnswer = question[currentQuestion]?.correct_answer;
   let history = useHistory();
+
+  useEffect(() => {
+    getUserWithToken();
+  }, []);
+
   const handleSelect = (ans) => {
     if (selected === ans && ans === rightAnswer) {
       return "select";
@@ -30,10 +40,49 @@ const Question = () => {
       return "select";
     }
   };
+  const questionId = question[currentQuestion]?._id;
+
+  const addquestion = questionId
+    ? [...user.question, questionId]
+    : question[currentQuestion]?._id;
+
+  const calcScore = user.score + score;
+
+  const newData = queryString.stringify({
+    _id: user._id,
+    question: addquestion,
+    score: calcScore,
+  });
 
   const checkAnswer = (ans) => {
     setSelected(ans);
-    if (ans == rightAnswer) setScore(score + 750);
+    if (ans === rightAnswer) {
+      setScore(score + 1);
+
+      //  update user information
+      // score
+      console.log("currscore" + score);
+      console.log("userScore" + calcScore);
+
+      updateUser(newData).then((res) => {
+        if (res) {
+          // getUser().then((res) => setUser(res));
+        } else {
+          console.log("no response");
+        }
+      });
+      // update question for this user
+      // with question id and user id  set answered to true  on question schema
+      // then sort questions depending on answered true or false for the user
+
+      // update user progress get  number of answered==true from questions  /  get all questions.lenght
+
+      if (selected === ans && selected !== rightAnswer) {
+        //  update user information
+        // wrongAnswer
+      }
+    }
+
     setCheck(false);
   };
   const getleght = question.length - 2;
@@ -42,6 +91,7 @@ const Question = () => {
       history.push("/result");
     } else if (selected) {
       setCurrentQuestion(currentQuestion + 1);
+
       setSelected();
     } else {
       setCheck("Please select one answer");
@@ -86,14 +136,6 @@ const Question = () => {
       </div>
       <div className="buttons">
         <Button
-          variant="contained"
-          size="large"
-          style={{ width: 185, color: "#f57c00", backgroundColor: "#424242" }}
-          onClick={next}
-        >
-          Next
-        </Button>
-        <Button
           onClick={skipQuestion}
           variant="contained"
           size="large"
@@ -108,6 +150,14 @@ const Question = () => {
           onClick={quit}
         >
           Quit
+        </Button>
+        <Button
+          variant="contained"
+          size="large"
+          style={{ width: 185, color: "#f57c00", backgroundColor: "#424242" }}
+          onClick={next}
+        >
+          Next
         </Button>
       </div>
     </div>

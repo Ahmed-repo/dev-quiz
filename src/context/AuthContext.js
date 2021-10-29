@@ -18,7 +18,7 @@ export const AuthController = (props) => {
 
   const getUserWithToken = () => {
     axios
-      .get("http://localhost:3000/users/user", {
+      .get("http://localhost:3002/users/user", {
         headers: {
           "auth-token": localStorage.getItem("token"),
         },
@@ -32,10 +32,11 @@ export const AuthController = (props) => {
 
   const login = (loginData) => {
     axios
-      .post("http://localhost:3000/auth/login", loginData)
+      .post("http://localhost:3002/auth/login", loginData)
       .then((res) => {
         localStorage.setItem("token", res.headers["auth-token"]);
         getUserWithToken();
+        history.push("/");
       })
       .catch((err) => {
         setErrorMessageLogin(err.response);
@@ -47,10 +48,11 @@ export const AuthController = (props) => {
 
   const register = (registerData) => {
     axios
-      .post("http://localhost:3000/auth/register", registerData)
+      .post("http://localhost:3002/auth/register", registerData)
       .then((res) => {
         localStorage.setItem("token", res.headers["auth-token"]);
         getUserWithToken();
+        history.push(`/`);
       })
       .catch((err) => {
         setErrorMessage(err.response);
@@ -63,6 +65,8 @@ export const AuthController = (props) => {
   const logout = (logoutdata) => {
     localStorage.removeItem("token");
     setIsLoggedIn(false);
+    setErrorMessage(null);
+    setErrorMessageLogin(null);
     logoutdata.preventDefault();
     history.push(`/`);
   };
@@ -79,6 +83,8 @@ export const AuthController = (props) => {
     setErrorMessage,
     errorMessageLogin,
     setErrorMessageLogin,
+    setUser,
+    getUserWithToken,
   };
 
   return (
