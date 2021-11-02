@@ -9,7 +9,8 @@ import { Logout } from "@mui/icons-material";
 import logo from "../../assets/logo_transparent.png";
 import useAuthContext from "../../hooks/useAuthContext";
 import "./Navbar.css";
-
+import styled from "styled-components";
+import { motion } from "framer-motion";
 const useStyles = makeStyles((theme) => ({
   toolbar: {
     backgroundColor: "#424242",
@@ -65,7 +66,7 @@ const Navbar = () => {
         </div>
         {toggle ? (
           <div className="navshowContainer">
-            <div className="NavShow">
+            <motion.div className="NavShow">
               <div className="Linkss">
                 <Link to="/">
                   <Home /> Home
@@ -74,7 +75,6 @@ const Navbar = () => {
                   <Fragment>
                     <Link to="/category">Start a Quiz</Link>
                     <Link to="/leaderboard">Leaderboard</Link>
-                    <Link to="/submit">Submit a Question</Link>
                     <Link to="/account">Account</Link>
                   </Fragment>
                 )}
@@ -94,7 +94,7 @@ const Navbar = () => {
                 {/* {user.admin === true && <Link to="/admin">Admin Panel</Link>} */}
                 {/* Shows Admin Link if user is Admin */}
               </div>
-            </div>
+            </motion.div>
           </div>
         ) : (
           ""
