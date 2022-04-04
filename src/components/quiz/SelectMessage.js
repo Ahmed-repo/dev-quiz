@@ -6,7 +6,7 @@ const SelectMessage = ({ children }) => {
         padding: 10,
         marginBottom: 10,
         borderRadius: 25,
-        backgroundColor: "orangered",
+        backgroundColor: "#ffd166",
         textAlign: "center",
         color: "white",
         textTransform: "capitalize",

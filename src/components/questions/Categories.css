@@ -2,5 +2,13 @@
   display: flex;
   align-content: center;
   justify-content: center;
-  padding-left: 52%;
+  padding-left: 50%;
+}
+#container {
+  background: #26547c;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }

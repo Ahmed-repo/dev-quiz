@@ -1,5 +1,5 @@
 import { Button } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { getUser, updateUser } from "../../Controller";
 import useAuthContext from "../../hooks/useAuthContext";
@@ -7,6 +7,8 @@ import useAuthContext from "../../hooks/useAuthContext";
 import useQuestionContext from "../../hooks/useQuestionContext";
 import "./Question.css";
 import SelectMessage from "./SelectMessage";
+import rightAnswerSound from "../../assets/sound/Right-answer-sound-effect.mp3";
+import wrongAnswerSound from "../../assets/sound/failure-sound.mp3";
 const queryString = require("query-string");
 const Question = () => {
   const {
@@ -56,11 +58,15 @@ const Question = () => {
 
   const checkAnswer = (ans) => {
     setSelected(ans);
+    if (ans !== rightAnswer) {
+      document.getElementById("wrong-answer-sound").play();
+    }
     if (ans === rightAnswer) {
-      setScore(score + 1);
+      document.getElementById("right-answer-sound").play();
 
       //  update user information
       // score
+      setScore(score + 1);
       console.log("currscore" + score);
       console.log("userScore" + calcScore);
 
@@ -113,6 +119,10 @@ const Question = () => {
   console.log(question.length);
   return (
     <div className="questionContainer">
+      <Fragment>
+        <audio id="right-answer-sound" src={rightAnswerSound}></audio>
+        <audio id="wrong-answer-sound" src={wrongAnswerSound}></audio>
+      </Fragment>
       <h1>Question {currentQuestion + 1}</h1>
       <div className="singleQuestion">
         <h2>{question[currentQuestion].question}</h2>
@@ -136,25 +146,26 @@ const Question = () => {
       </div>
       <div className="buttons">
         <Button
-          onClick={skipQuestion}
           variant="contained"
           size="large"
-          style={{ width: 185, color: "#f57c00", backgroundColor: "#424242" }}
-        >
-          Skip
-        </Button>
-        <Button
-          variant="contained"
-          size="large"
-          style={{ width: 185, color: "#f57c00", backgroundColor: "#424242" }}
+          style={{ width: 185, color: "#fcfcfc", backgroundColor: "#FF4500" }}
           onClick={quit}
         >
           Quit
         </Button>
         <Button
+          onClick={skipQuestion}
           variant="contained"
           size="large"
-          style={{ width: 185, color: "#f57c00", backgroundColor: "#424242" }}
+          style={{ width: 185, color: "#fcfcfc", backgroundColor: "#ff4500" }}
+        >
+          Skip
+        </Button>
+
+        <Button
+          variant="contained"
+          size="large"
+          style={{ width: 185, color: "#fcfcfc", backgroundColor: "#ff4500" }}
           onClick={next}
         >
           Next

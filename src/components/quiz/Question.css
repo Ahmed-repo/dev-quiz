@@ -1,8 +1,10 @@
 .questionContainer {
+  height: 80vh;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  color: white;
 }
 
 .singleQuestion {
@@ -13,7 +15,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  border: 5px solid rgb(255, 255, 255, 0.2);
+  border: 2px solid rgb(255, 69, 0);
   padding: 20px;
   margin-top: 10px;
 }
@@ -31,38 +33,112 @@
 
 .single_answer {
   width: 46%;
-  height: 75px;
+  height: 65px;
   padding: 15px 20px;
   margin: 10px;
   font-size: 20px;
   border-radius: 25px;
+  border-color: rgba(255, 255, 255, 0.2);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
 }
 
-@media (max-width: 614px) {
+@media (max-width: 1024px) {
+  .questionContainer h1 {
+    font-size: 35px;
+  }
+
+  .single_answer {
+    font-size: 15px;
+    height: 60px;
+    align-self: center;
+  }
+  .singleQuestion {
+    width: 80%;
+    min-height: 350px;
+  }
+  .singleQuestion h2 {
+    font-size: 25px;
+  }
+}
+
+@media (max-width: 768px) {
+  .questionContainer h1 {
+    font-size: 25px;
+  }
+
   .single_answer {
     width: 100%;
     font-size: 15px;
+    height: 60px;
+    align-self: center;
   }
   .singleQuestion {
-    width: 70%;
+    width: 80%;
+    min-height: 250px;
+  }
+  .singleQuestion h2 {
+    font-size: 25px;
   }
 }
 
 .buttons {
   display: flex;
-  width: 100%;
-  justify-content: space-around;
+  width: 85%;
+  justify-content: space-between;
+
   padding-top: 7%;
 }
 
 .select {
-  background-color: rgb(7, 207, 0);
+  background-color: #06d6a0;
   color: white;
-  box-shadow: 0 0 1px black;
+  transition: all 0.6s ease-in-out;
+  /* -webkit-box-shadow: 0px 0px 38px 9px rgba(252, 252, 252, 0.51);
+  box-shadow: 0px 0px 38px 9px rgba(252, 252, 252, 0.51); */
 }
 
 .wrong_answer {
-  background-color: rgb(233, 0, 0);
+  background-color: #ef476f;
   color: white;
-  box-shadow: 0 0 1px black;
+  box-shadow: 0 0 1px #fcfcfc;
+}
+
+@media (max-width: 360px) {
+  .questionContainer h1 {
+    font-size: 15px;
+  }
+
+  .single_answer {
+    width: 100%;
+    font-size: 12px;
+    height: 40px;
+    align-self: center;
+  }
+  .singleQuestion {
+    width: 80%;
+    min-height: 80px !important;
+  }
+  .singleQuestion h2 {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 614px) {
+  .single_answer {
+    width: 100%;
+    font-size: 12px;
+    height: 50px;
+    align-self: center;
+  }
+  .singleQuestion {
+    width: 80%;
+    min-height: 200px;
+  }
+  .questionContainer h1 {
+    font-size: 18px;
+    padding-top: 20px;
+  }
 }
