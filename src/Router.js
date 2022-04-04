@@ -24,7 +24,7 @@ const Router = () => {
 
   return (
     <Route>
-      <Navbar />
+      {/* <Navbar /> */}
       <Switch>
         <QuestionController>
           <Route exact path="/landingpage" component={Landingpage} />

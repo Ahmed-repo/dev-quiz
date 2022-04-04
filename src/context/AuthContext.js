@@ -64,6 +64,7 @@ export const AuthController = (props) => {
 
   const logout = (logoutdata) => {
     localStorage.removeItem("token");
+    localStorage.clear();
     setIsLoggedIn(false);
     setErrorMessage(null);
     setErrorMessageLogin(null);

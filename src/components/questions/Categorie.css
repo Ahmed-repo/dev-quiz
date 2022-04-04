@@ -1,4 +1,4 @@
-.difficulty {
+/* .difficulty {
   width: 400px;
   height: 300px;
   background-color: #37474f;
@@ -31,8 +31,17 @@
   margin: 3%;
   width: 700px;
   height: 400px;
-}
+} */
 
+.eachCategorie {
+  color: aquamarine;
+}
+.categorie_difficulty {
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+}
 @media (max-width: 614px) {
   .categorie_difficulty {
     flex-direction: column;
