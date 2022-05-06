@@ -15,9 +15,23 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  border: 2px solid rgb(255, 69, 0);
+  border-radius: 25px;
   padding: 20px;
   margin-top: 10px;
+  /* background-image: url("../../assets/Frame 32.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 15%; */
+
+  /* background-image: linear-gradient(
+    147.23deg,
+    #486688 5.09%,
+    rgba(43, 123, 215, 0.27) 53.59%,
+    #b2d7ee 87.54%
+  ); */
+
+  background: var(--main-bg1);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .answers {
@@ -27,7 +41,7 @@
   flex: 1;
   align-items: center;
   justify-content: space-around;
-  margin: 10px;
+  margin: 40px;
   padding-top: 3%;
 }
 

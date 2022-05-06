@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import logo from "../../assets/logo_transparent.png";
+import logo from "../../assets/QExpert.svg";
 const LogoWraper = styled.div`
   display: flex;
   align-items: center;
 `;
 const LogoImg = styled.h2`
-  width: 85px;
+  width: 90px;
   height: 85px;
 
   img {
@@ -29,7 +29,6 @@ export function Logo(props) {
       <LogoImg>
         <img src={logo} alt="logo_img" />
       </LogoImg>
-      <LogoText>Quiz</LogoText>
     </LogoWraper>
   );
 }

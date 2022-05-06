@@ -50,6 +50,11 @@ const Link = styled.a`
   text-decoration: none;
   color: inherit;
   font-size: inherit;
+  &:hover {
+    transform: scale(1.2, 1.2);
+
+    transition: all 0.6s ease-in-out;
+  }
 `;
 
 const Marginer = styled.div`

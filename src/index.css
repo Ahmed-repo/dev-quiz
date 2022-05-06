@@ -8,12 +8,19 @@
   --font-base: "DM Sans", sans-serif;
 
   --primary-color: #edf2f8;
-  --secondary-color: #313bac;
+  --secondary-color: #26547c;
   --black-color: #030303;
   --lightGray-color: #e4e4e4;
   --gray-color: #6b7688;
   --brown-color: #46364a;
   --white-color: #ffffff;
+  --main-bg: radial-gradient(
+    circle at 50% 50%,
+    rgba(255, 69, 0, 1) 0%,
+    rgba(126, 56, 72, 1) 100%
+  );
+
+  --main-bg1: radial-gradient(50% 50% at 50% 50%, #fc4502 0%, #8f3e45 100%);
 }
 
 /* body {

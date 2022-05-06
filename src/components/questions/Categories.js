@@ -44,7 +44,8 @@ const StartBtn = styled.button`
   color: #fcfcfc;
   width: 185px;
   height: 65px;
-  background: orangered;
+  background: var(--main-bg);
+
   font-family: "Roboto";
   font-size: 1.8rem;
   letter-spacing: 2px;

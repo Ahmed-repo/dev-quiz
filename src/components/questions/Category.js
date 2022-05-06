@@ -6,10 +6,12 @@ import "./Categorie.css";
 import styled from "styled-components";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import svg_js from "../../assets/Js.svg";
 const Category = () => {
   const { categorie, setCategorie, dificulty, setDificulty } =
     useQuestionContext();
   const [IndexCategorie, setIndexCategorie] = useState(false);
+  const [svgIcon, setSvgIcon] = useState("");
   const handleChangeType = (e) => {
     setCategorie(e.target.value);
   };
@@ -104,9 +106,14 @@ const Category = () => {
     height: 100px;
     color: white;
 
+    /* background-image: url(${svg_js});
+    background-repeat: no-repeat; */
+
     display: flex;
     justify-content: center;
+    flex-direction: column;
     align-items: center;
+
     border-radius: 15px;
     border: 2px solid;
     border-color: whitesmoke;
@@ -114,9 +121,16 @@ const Category = () => {
     cursor: pointer;
     text-transform: capitalize;
 
+    img {
+      height: 70px;
+      &:hover {
+        transform: rotateY(360deg);
+        transition: 800ms linear all;
+      }
+    }
+
     &:hover {
       transform: scale(1.2, 1.2);
-
       transition: all 0.6s ease-in-out;
       -webkit-box-shadow: 0px 0px 38px 9px rgba(252, 252, 252, 0.51);
       box-shadow: 0px 0px 38px 9px rgba(252, 252, 252, 0.51);
@@ -124,8 +138,16 @@ const Category = () => {
 
     @media (max-width: 614px) {
       height: 40px;
-      width: 80%;
+      width: 60%;
       margin: 4px;
+      flex-direction: row;
+      justify-content: flex-start;
+
+      img {
+        height: 30px;
+        padding-left: 15%;
+        padding-right: 10%;
+      }
     }
     @media (max-width: 360px) {
       height: 35px;
@@ -149,6 +171,7 @@ const Category = () => {
               animate={{ opacity: 1, y: -10, x: 0 }}
               transition={{ delay: 0.2, duration: 1, type: "tweet" }}
             >
+              <img src={svgIcon}></img>
               {categorie}
             </Categoryy>
           ) : (
@@ -159,11 +182,14 @@ const Category = () => {
                 exit={{ opacity: 0, y: -250, x: 150 }}
                 transition={{ delay: 0.5, duration: 1.3, type: "tween" }}
                 onClick={() =>
-                  setCategorie(cat.value) & setIndexCategorie(true)
+                  setCategorie(cat.value) &
+                  setIndexCategorie(true) &
+                  setSvgIcon(cat.svg)
                 }
                 value={cat.value}
                 key={index}
               >
+                <img src={cat.svg}></img>
                 {cat.value}
               </Categoryy>
             ))
