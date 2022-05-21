@@ -1,4 +1,3 @@
-import { Button } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 import useQuestionContext from "../../hooks/useQuestionContext";

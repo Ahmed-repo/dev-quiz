@@ -1,22 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import useAuthContext from "../../hooks/useAuthContext";
 import useQuestionContext from "../../hooks/useQuestionContext";
 import Navbar from "../navbar/Navbar";
-const Result = () => {
-  const {
-    question,
-    setQuestion,
-    score,
-    setScore,
-    answers,
-    setAnswers,
-    currentQuestion,
-    categorie,
-    setCurrentQuestion,
-  } = useQuestionContext();
+import StyledButton from "../styles/StyledButton";
 
-  const { user } = useAuthContext();
+const Result = () => {
+  const { question, score } = useQuestionContext();
+
+  const { user, getUserWithToken } = useAuthContext();
+  useEffect(() => {
+    getUserWithToken();
+  }, []);
 
   const Container = styled.div`
     background: var(--secondary-color);
@@ -26,7 +22,7 @@ const Result = () => {
     height: 100vh;
     padding: 0 20px;
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
     flex-direction: column;
   `;
@@ -39,7 +35,7 @@ const Result = () => {
 
   const Paragrapf = styled.p`
     color: var(--primary-color);
-    font-size: 2rem;
+    font-size: 1rem;
     font-weight: 200;
   `;
 
@@ -53,13 +49,13 @@ const Result = () => {
   const ProgresBarNumber = styled.h4`
     color: white;
   `;
-  const checkWith = user.progress + 1;
+  const checkWith = user && user.progress + 1 / 2;
   const ProgresBar = styled.div`
     width: ${checkWith}vw;
     height: 0.5vh;
     background: var(--main-bg1);
   `;
-
+  console.log(user);
   return (
     <>
       <Navbar />
@@ -67,22 +63,25 @@ const Result = () => {
       <Container>
         <ProgresBarWrapper>
           <ProgresBarNumber>
-            {user.progress}/{question.length}
+            {user && user.progress}/{question.length}
           </ProgresBarNumber>
           <ProgresBarBackground>
             <ProgresBar />
           </ProgresBarBackground>
         </ProgresBarWrapper>
 
-        <Title>Well done {user.first_name}</Title>
+        <Title>Well done {user && user.first_name}</Title>
         <Paragrapf>your Current score is {score}</Paragrapf>
-        <Paragrapf>Score overall {user.score}</Paragrapf>
+        <Paragrapf>Score overall {user && user.score}</Paragrapf>
         <Paragrapf>
-          wrong answered question Overall {user.wrongAnswer}
+          wrong answered question Overall {user && user.wrongAnswer}
         </Paragrapf>
         <Paragrapf>
-          Correct answered question Overall {user.correctAnswer}
+          Correct answered question Overall {user && user.correctAnswer}
         </Paragrapf>
+        <Link to="/category">
+          <StyledButton>Start new Game</StyledButton>
+        </Link>
       </Container>
     </>
   );

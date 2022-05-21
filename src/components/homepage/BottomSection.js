@@ -6,7 +6,6 @@ import category from "../../assets/howItWorks-icons/category.svg";
 import flame from "../../assets/howItWorks-icons/flame.svg";
 import compare from "../../assets/howItWorks-icons/compare.svg";
 import Footer from "./Footer";
-// import { Logo } from "../../assets/logo.png";
 
 const Container = styled.div`
   width: 100%;

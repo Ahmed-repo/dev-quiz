@@ -1,11 +1,8 @@
 import React, { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
 
-import logo from "../../assets/logo_transparent.png";
 import useAuthContext from "../../hooks/useAuthContext";
 import "./Navbar.css";
-import styled from "styled-components";
-import { motion } from "framer-motion";
 
 const Navbar = () => {
   const { user, isLoggedIn, logout } = useAuthContext();
