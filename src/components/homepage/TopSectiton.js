@@ -45,9 +45,15 @@ const TopSectiton = () => {
             A fun learning platform <Span>where anyone can contribute</Span>
           </Text>
         </TextContainer>
-        <Link to="/category">
-          <Btn>get Started</Btn>
-        </Link>
+        {isLoggedIn ? (
+          <Link to="/category">
+            <Btn>get Started</Btn>
+          </Link>
+        ) : (
+          <Link to="/auth/login">
+            <Btn>get Started</Btn>
+          </Link>
+        )}
       </TextBtnContainer>
     </TopContainer>
   );
