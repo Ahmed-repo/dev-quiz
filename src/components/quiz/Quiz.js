@@ -7,11 +7,21 @@ import { getUser } from "../../Controller";
 import styled from "styled-components";
 import { useHistory } from "react-router";
 import Navbar from "../navbar/Navbar";
-
+import cup from "../../assets/level-score/cup.svg";
+import volumeUP from "../../assets/sound/volumeUP.svg";
+import volumeMute from "../../assets/sound/volumeMute.svg";
 const QuizContainer = styled.div`
   width: 100%;
   height: 100vh;
   background: #26547c;
+`;
+
+const Sound = styled.div`
+  cursor: pointer;
+`;
+const CupScore = styled.div`
+  display: flex;
+  flex-direction: row;
 `;
 
 const Quizinfo = styled.div`
@@ -54,6 +64,7 @@ const Quiz = () => {
   const { question, score, setAnswers, currentQuestion, categorie } =
     useQuestionContext();
   const { user } = useAuthContext();
+  const [volume, setVolume] = useState(true);
   useEffect(() => {
     setAnswers(
       question &&
@@ -67,6 +78,13 @@ const Quiz = () => {
   const handleShuffle = (options) => {
     return options.sort(() => Math.random() - 0.5);
   };
+  const handleVolume = () => {
+    if (volume) {
+      return volumeUP;
+    } else {
+      return volumeMute;
+    }
+  };
   // console.log(question);
   // console.log(answers);
   return (
@@ -75,21 +93,29 @@ const Quiz = () => {
       {question ? (
         <>
           <Quizinfo>
-            <p>
-              Categorie:{" "}
-              {categorie ? (
-                question[currentQuestion].categorie
+            <Sound
+              onClick={(e) => {
+                setVolume(!volume);
+              }}
+            >
+              {volume ? (
+                <img src={volumeUP} height="15px" />
               ) : (
-                <CircularProgress />
+                <img src={volumeMute} height="15px" />
               )}
-            </p>
-            <p>Difficulty: {question[currentQuestion].difficulty}</p>
+            </Sound>
+            <CupScore>
+              <img src={cup} height="15px" />
+            </CupScore>
 
-            <p> Current Score: {score}</p>
+            {/* <div onClick={setVolume(!volume)}>
+              {volume && <img src={volumeUP} height="25px" />}
+              {!volume && <img src={volumeMute} height="25px" />}
+            </div> */}
 
-            <p>
+            <div>
               Total: {currentQuestion}/{question.length}
-            </p>
+            </div>
           </Quizinfo>
           <Question />
         </>

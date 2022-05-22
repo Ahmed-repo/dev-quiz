@@ -12,6 +12,7 @@ const Category = () => {
     useQuestionContext();
   const [IndexCategorie, setIndexCategorie] = useState(false);
   const [svgIcon, setSvgIcon] = useState("");
+  const [svgDifIcon, setDifSvgIcon] = useState("");
   const handleChangeType = (e) => {
     setCategorie(e.target.value);
   };
@@ -74,6 +75,7 @@ const Category = () => {
     color: white;
 
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     border-radius: 15px;
@@ -93,8 +95,12 @@ const Category = () => {
 
     @media (max-width: 614px) {
       height: 40px;
-      width: 80%;
+      width: 60%;
       margin: 4px;
+      padding-left: 30px;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
     }
     @media (max-width: 360px) {
       height: 35px;
@@ -205,15 +211,17 @@ const Category = () => {
             animate={{ opacity: 1, y: -10, x: 0 }}
             transition={{ delay: 0.2, duration: 1, type: "tween" }}
           >
+            <img src={svgDifIcon} height="35px"></img>
             {dificulty}
           </Difficulty>
         ) : (
           IndexCategorie &&
           difficultyData.map((dif) => (
             <Difficulty
-              onClick={() => setDificulty(dif.value)}
+              onClick={() => setDificulty(dif.value) & setDifSvgIcon(dif.svg)}
               value={dif.value}
             >
+              <img src={dif.svg} height="35px"></img>
               {dif.value}
             </Difficulty>
           ))
