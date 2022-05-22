@@ -1,6 +1,7 @@
 import { Route, Switch } from "react-router";
 import Homepage from "./components/homepage/Homepage";
 import Result from "./components/quiz/Result";
+import Leaderboard from "./components/leaderboard/Leaderboard";
 import Register from "./components/account/Register";
 import LogIn from "./components/account/LogIn";
 import { QuestionController } from "./context/QuestionContext";
@@ -25,6 +26,7 @@ const Router = () => {
             <Route exact path="/contact" component={Contact} />
           </Suspense>
           <Route exact path="/result" component={Result} />
+          <Route exact path="/leaderboard" component={Leaderboard} />
           <Route exact path="/auth/register" component={Register} />
           <Route exact path="/auth/login" component={LogIn} />
         </QuestionController>

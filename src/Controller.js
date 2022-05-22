@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const updateUser = async (updateData) => {
   return await axios
-    .put("http://localhost:3002/users/score", updateData, {
+    .put("https://quizexpert.herokuapp.com/users/score", updateData, {
       headers: {
         "auth-token": localStorage.getItem("token"),
       },
@@ -17,7 +17,7 @@ export const updateUser = async (updateData) => {
 };
 export const getUser = async () => {
   return await axios
-    .get("http://localhost:3002/users/user", {
+    .get("https://quizexpert.herokuapp.com/users/user", {
       headers: {
         "auth-token": localStorage.getItem("token"),
       },

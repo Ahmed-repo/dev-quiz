@@ -20,7 +20,7 @@ export const QuestionController = (props) => {
   const getQuestion = async () => {
     await axios
       .get(
-        `http://localhost:3002/questions/${categorie && categorie}/${
+        `https://quizexpert.herokuapp.com/questions/${categorie && categorie}/${
           dificulty && dificulty
         }`
       )

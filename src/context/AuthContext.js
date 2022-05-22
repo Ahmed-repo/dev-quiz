@@ -18,7 +18,7 @@ export const AuthController = (props) => {
 
   const getUserWithToken = () => {
     axios
-      .get("http://localhost:3002/users/user", {
+      .get("https://quizexpert.herokuapp.com/users/user", {
         headers: {
           "auth-token": localStorage.getItem("token"),
         },
@@ -32,7 +32,7 @@ export const AuthController = (props) => {
 
   const login = (loginData) => {
     axios
-      .post("http://localhost:3002/auth/login", loginData)
+      .post("https://quizexpert.herokuapp.com/auth/login", loginData)
       .then((res) => {
         localStorage.setItem("token", res.headers["auth-token"]);
         getUserWithToken();
@@ -48,7 +48,7 @@ export const AuthController = (props) => {
 
   const register = (registerData) => {
     axios
-      .post("http://localhost:3002/auth/register", registerData)
+      .post("https://quizexpert.herokuapp.com/auth/register", registerData)
       .then((res) => {
         localStorage.setItem("token", res.headers["auth-token"]);
         getUserWithToken();
