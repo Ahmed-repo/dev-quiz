@@ -9,6 +9,8 @@ export const QuestionController = (props) => {
   const [categorie, setCategorie] = useState("");
   const [dificulty, setDificulty] = useState("");
   const [score, setScore] = useState(0);
+  const [checkProgress, setCheckProgress] = useState(0);
+  const [checkRightAnswer, setCheckRightAnswer] = useState(0);
   const [answers, setAnswers] = useState();
   const [currentQuestion, setCurrentQuestion] = useState(0);
   useEffect(() => {
@@ -40,6 +42,10 @@ export const QuestionController = (props) => {
     setAnswers,
     currentQuestion,
     setCurrentQuestion,
+    checkProgress,
+    setCheckProgress,
+    checkRightAnswer,
+    setCheckRightAnswer,
   };
 
   return (

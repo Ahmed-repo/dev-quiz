@@ -1,14 +1,14 @@
-import { Button } from "@mui/material";
 import React, { Fragment, useEffect, useState } from "react";
 import { useHistory } from "react-router";
-import { getUser, updateUser } from "../../Controller";
+import { updateUser, getUser } from "../../Controller";
 import useAuthContext from "../../hooks/useAuthContext";
-
+import styled from "styled-components";
 import useQuestionContext from "../../hooks/useQuestionContext";
 import "./Question.css";
 import SelectMessage from "./SelectMessage";
 import rightAnswerSound from "../../assets/sound/Right-answer-sound-effect.mp3";
 import wrongAnswerSound from "../../assets/sound/failure-sound.mp3";
+
 const queryString = require("query-string");
 const Question = () => {
   const {
@@ -17,21 +17,20 @@ const Question = () => {
     score,
     setScore,
     answers,
-    setAnswers,
     currentQuestion,
     setCurrentQuestion,
+    setCheckProgress,
+    setCheckRightAnswer,
   } = useQuestionContext();
-  const { user, setUser, getUserWithToken } = useAuthContext();
+  const { user } = useAuthContext();
   const [selected, setSelected] = useState();
+
   const [skipped, setSkipped] = useState([]);
-  const [skip, setSkip] = useState(false);
+
   const [check, setCheck] = useState(false);
+  const [userData, setUserData] = useState(false);
   const rightAnswer = question[currentQuestion]?.correct_answer;
   let history = useHistory();
-
-  useEffect(() => {
-    getUserWithToken();
-  }, []);
 
   const handleSelect = (ans) => {
     if (selected === ans && ans === rightAnswer) {
@@ -48,13 +47,33 @@ const Question = () => {
     ? [...user.question, questionId]
     : question[currentQuestion]?._id;
 
-  const calcScore = user.score + score;
+  const points = score;
 
-  const newData = queryString.stringify({
-    _id: user._id,
-    question: addquestion,
-    score: calcScore,
-  });
+  useEffect(() => {
+    getUser(user.id).then((res) => {
+      setUserData(res);
+    }); // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  useEffect(() => {
+    if (userData) {
+      updatePoints();
+    }
+  }, [userData]);
+
+  const updatePoints = () => {
+    const newData = queryString.stringify({
+      _id: user._id,
+      question: addquestion,
+      score: user.score + points,
+      progress: user.progress + points,
+      correctAnswer: user.correctAnswer + points,
+    });
+    updateUser(newData).then((res) => {
+      if (res) {
+        console.log(res);
+      } else console.log(res + "Oops,Something went wrong");
+    });
+  };
 
   const checkAnswer = (ans) => {
     setSelected(ans);
@@ -68,15 +87,18 @@ const Question = () => {
       // score
       setScore(score + 1);
       console.log("currscore" + score);
-      console.log("userScore" + calcScore);
+      console.log("userScore" + points);
+      //progress
+      setCheckProgress(user.progress + 1);
+      // rightAnswer
+      setCheckRightAnswer(user.rightAnswer + 1);
 
-      updateUser(newData).then((res) => {
+      getUser().then((res) => {
         if (res) {
-          // getUser().then((res) => setUser(res));
-        } else {
-          console.log("no response");
-        }
-      });
+          setUserData(res);
+        } else console.log(res + "Oops,Something went wrong");
+      }); // eslint-disable-next-line react-hooks/exhaustive-deps
+
       // update question for this user
       // with question id and user id  set answered to true  on question schema
       // then sort questions depending on answered true or false for the user
@@ -112,6 +134,7 @@ const Question = () => {
   const quit = () => {
     setCurrentQuestion(0);
     setQuestion();
+    setUserData(false);
     history.push("/");
   };
   console.log("cur question " + currentQuestion);
@@ -145,34 +168,49 @@ const Question = () => {
           })}
       </div>
       <div className="buttons">
-        <Button
-          variant="contained"
-          size="large"
-          style={{ width: 185, color: "#fcfcfc", backgroundColor: "#FF4500" }}
-          onClick={quit}
-        >
-          Quit
-        </Button>
-        <Button
-          onClick={skipQuestion}
-          variant="contained"
-          size="large"
-          style={{ width: 185, color: "#fcfcfc", backgroundColor: "#ff4500" }}
-        >
-          Skip
-        </Button>
+        <Btn onClick={quit}>Quit</Btn>
+        <Btn onClick={skipQuestion}>Skip</Btn>
 
-        <Button
-          variant="contained"
-          size="large"
-          style={{ width: 185, color: "#fcfcfc", backgroundColor: "#ff4500" }}
-          onClick={next}
-        >
-          Next
-        </Button>
+        <Btn onClick={next}>Next</Btn>
       </div>
     </div>
   );
 };
 
 export default Question;
+const Btn = styled.button`
+  color: #fcfcfc;
+  width: 185px;
+  height: 55px;
+  background: var(--main-bg);
+
+  font-family: "Roboto";
+  font-size: 1.8rem;
+  letter-spacing: 2px;
+  font-weight: 400;
+  border: 1px solid whitesmoke;
+  border-radius: 15px;
+  text-transform: capitalize;
+
+  &:hover {
+    transform: scale(1.1, 1.1);
+    opacity: 2;
+
+    transition: all 0.6s ease-in-out;
+    -webkit-box-shadow: 0px 0px 38px 9px rgba(252, 252, 252, 0.51);
+    box-shadow: 0px 0px 38px 9px rgba(252, 252, 252, 0.51);
+  }
+
+  @media (max-width: 614px) {
+    width: 120px;
+    height: 45px;
+    width: 50%;
+    font-size: 1.2rem;
+  }
+  @media (max-width: 360px) {
+    width: 120px;
+    height: 45px;
+    width: 50%;
+    font-size: 1.2rem;
+  }
+`;

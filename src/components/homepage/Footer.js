@@ -1,210 +1,152 @@
 import React from "react";
-import { Link } from "react-scroll";
-import tw from "twin.macro";
-// import { Logo } from "../../assets/logo.png";
-import { SiFacebook, SiInstagram, SiTwitter } from "react-icons/si";
+import styled from "styled-components";
+import fb from "../../assets/footer-icons/fb.svg";
+import inst from "../../assets/footer-icons/inst.svg";
+import twiter from "../../assets/footer-icons/twiter.svg";
+import github from "../../assets/footer-icons/github.svg";
+const FooterContainer = styled.div`
+  width: 100%;
+  height: 33vh;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+`;
+const TextcontainerWrapper = styled.div`
+  display: flex;
+  padding-left: 15%;
+`;
+const TextContainer = styled.div`
+  height: 10vh;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  box-sizing: border-box;
+  align-self: center;
+  align-content: center;
+`;
+const Wrapper = styled.div`
+  box-sizing: border-box;
+  width: 50%;
+  margin-bottom: 32px;
+  padding: 0px 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 
-const FooterContainer = tw.div`
-    w-full
-    h-96
-   
-    mt-10
-    flex
-    pt-6
-    pl-2
-    pr-2
-    lg:pt-14
-    lg:pr-16
-    lg:pl-16
-    text-white
-    items-center
-    flex-col
+  img {
+    cursor: pointer;
+    &:hover {
+      transform: scale(1.2, 1.2);
+
+      transition: all 0.6s ease-in-out;
+    }
+  }
+  @media (max-width: 950px) {
+    width: 100%;
+    height: 70px;
+  }
+`;
+const TextWrapper = styled.div`
+  padding-left: 25px;
+  @media (max-width: 950px) {
+    width: 100%;
+  }
+`;
+const TextTitle = styled.h2`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-items: center;
+  padding-top: 35px;
+  font-size: 2.5rem;
+  font-weight: 400;
+  color: var(--secondary-color);
+  @media (max-width: 950px) {
+    font-size: 1.5rem;
+    margin-bottom: 8%;
+  }
+`;
+const Text1 = styled.h4`
+  font-size: 2rem;
+  font-weight: 500;
+  color: var(--secondary-color);
+  @media (max-width: 950px) {
+    font-size: 0.8rem;
+  }
+`;
+const Text2 = styled.p`
+  font-size: 1.3rem;
+  font-weight: 300;
+  color: var(--black-color);
+
+  @media (max-width: 950px) {
+    font-size: 0.6rem;
+    width: 100%;
+  }
 `;
 
-const Wrapper = tw.div`
-    flex
-    flex-col
-    w-full
-    h-full
-    justify-center
-    max-w-6xl
-    lg:max-w-7xl
+const IconContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  flex-direction: row;
+  padding-top: 10%;
+
+  img {
+    height: 35px;
+
+    padding-left: 5%;
+    padding-right: 5%;
+    cursor: pointer;
+
+    &:hover {
+      transform: rotateY(360deg);
+
+      transition: all 1.1s ease-in-out;
+    }
+  }
 `;
 
-const TopSection = tw.div`
-    flex
-    w-full
-    justify-center
-    lg:justify-start
-`;
+const Rights = styled.div`
+  display: flex;
+  justify-content: center;
+  padding-top: 2%;
 
-const InnerContainer = tw.div`
-    w-full
-    flex
-    flex-col
-    lg:flex-row
-    flex-wrap
-    pt-16
-    lg:pt-9
-    justify-between
-    lg:justify-start
-    h-full
+  p {
+    font-weight: 300;
+    color: var(--gray-color);
+  }
 `;
-
-const LeftInnerContainer = tw.div`
-    flex
-    flex[5]
-    w-full
-    h-full
-    justify-between
-    lg:justify-start
-`;
-
-const RightInnerContainer = tw.div`
-    flex
-    flex-col
-    lg:flex-row
-    flex[1]
-    w-full
-    h-full
-    mb-5
-    lg:mb-0
-    flex-wrap
-`;
-
-const Menu = tw.ul`
-    flex
-    flex-col
-    list-none
-    mr-3
-    lg:ml-5
-    lg:mr-16
-`;
-
-const MenuItem = tw.li`
-    flex
-    text-white
-    text-sm
-    lg:text-base
-    mt-2
-`;
-
-const BottomSection = tw.div`
-    w-full
-    flex
-    flex-wrap
-    items-center
-    justify-between
-    pl-4
-    pr-4
-    h-28
-    lg:h-14
-    bottom-0
-    border-t
-    border-t-gray-300
-    border-opacity-50
-`;
-
-const Copyright = tw.span`
-    font-size[x-small]
-    text-gray-300
-    w-full
-    lg:w-auto
-    text-center
-`;
-
-const SmallText = tw.span`
-    font-size[small]
-    text-gray-300
-`;
-
-const SocialMedia = tw.div`
-    flex
-    justify-center
-`;
-
-const Icon = tw.span`
-    h-6
-    flex
-    mr-4
-    cursor-pointer
-    transition-colors
-    hover:text-gray-300
-`;
-
 export default function Footer() {
   return (
     <FooterContainer>
-      <Wrapper>
-        <TopSection>{/* <Logo /> */}</TopSection>
-        <InnerContainer>
-          <LeftInnerContainer>
-            <Menu>
-              <MenuItem>
-                <Link to="Home">Home</Link>
-              </MenuItem>
-              <MenuItem>
-                <Link to="Explore">Explore</Link>
-              </MenuItem>
-              <MenuItem>
-                <Link to="TravelPlaces">Travel Places</Link>
-              </MenuItem>
-            </Menu>
-            <Menu>
-              <MenuItem>
-                <Link to="#">About Us</Link>
-              </MenuItem>
-              <MenuItem>
-                <Link to="# ">Contact Us</Link>
-              </MenuItem>
-              <MenuItem>
-                <Link to="#">Our Travel Terms</Link>
-              </MenuItem>
-            </Menu>
-            <Menu>
-              <MenuItem>
-                <Link to="#">Company</Link>
-              </MenuItem>
-              <MenuItem>
-                <Link to="#">Careers</Link>
-              </MenuItem>
-              <MenuItem>
-                <Link to="#">Travel Guide</Link>
-              </MenuItem>
-            </Menu>
-          </LeftInnerContainer>
-          <RightInnerContainer>
-            <SocialMedia>
-              <Icon>
-                <SiFacebook size={25} />
-              </Icon>
-              <Icon>
-                <SiInstagram size={25} />
-              </Icon>
-              <Icon>
-                <SiTwitter size={25} />
-              </Icon>
-            </SocialMedia>
-          </RightInnerContainer>
-        </InnerContainer>
-        <BottomSection>
-          <Copyright>
-            © {new Date().getFullYear()} TRAVELYA. All rights reserved.
-          </Copyright>
-          <SmallText>
-            <a href="#">Terms of Service</a>
-          </SmallText>
-          <SmallText>
-            <a href="#">Privacy Policy</a>
-          </SmallText>
-          <SmallText>
-            <a href="#">Security</a>
-          </SmallText>
-          <SmallText>
-            <a href="#">Sitemap</a>
-          </SmallText>
-        </BottomSection>
-      </Wrapper>
+      <TextcontainerWrapper>
+        <TextContainer>
+          <TextWrapper>
+            <Text1>Ready to become an QExpert?</Text1>
+            <Text2> Register and start your Journey.</Text2>
+          </TextWrapper>
+        </TextContainer>
+        <TextContainer>
+          <TextWrapper>
+            <Text1>get Started </Text1>
+            <Text2> Learn More</Text2>
+          </TextWrapper>
+        </TextContainer>
+      </TextcontainerWrapper>
+      <IconContainer>
+        <img src={fb} />
+        <img src={inst} />
+        <img src={twiter} />
+        <img src={github} />
+      </IconContainer>
+      <Rights>
+        <p>© 2022 QExpert. All rights reserved.</p>
+      </Rights>
     </FooterContainer>
   );
 }

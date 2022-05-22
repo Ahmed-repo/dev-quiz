@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import useQuestionContext from "../../hooks/useQuestionContext";
 import CircularProgress from "@mui/material/CircularProgress";
 import Question from "./Question";
-import { Typography } from "@mui/material";
 import useAuthContext from "../../hooks/useAuthContext";
 import { getUser } from "../../Controller";
 import styled from "styled-components";
@@ -52,17 +51,8 @@ const Quizinfo = styled.div`
 
 const Quiz = () => {
   let history = useHistory();
-  const {
-    question,
-    setQuestion,
-    score,
-    setScore,
-    answers,
-    setAnswers,
-    currentQuestion,
-    categorie,
-    setCurrentQuestion,
-  } = useQuestionContext();
+  const { question, score, setAnswers, currentQuestion, categorie } =
+    useQuestionContext();
   const { user } = useAuthContext();
   useEffect(() => {
     setAnswers(

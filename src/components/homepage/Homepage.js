@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, Suspense, lazy } from "react";
 import styled from "styled-components";
 import TopSectiton from "./TopSectiton";
 
-import MidSectiton from "./MidSection";
-import Footer from "./Footer";
+const BottomSection = lazy(() => import("./BottomSection"));
 const Container = styled.div`
   width: 100%;
   height: 100vh;
@@ -14,9 +13,9 @@ const Homepage = () => {
   return (
     <Container>
       <TopSectiton />
-      <MidSectiton />
-      <TopSectiton />
-      <Footer />
+      <Suspense fallback={<div>Loaging</div>}>
+        <BottomSection />
+      </Suspense>
     </Container>
   );
 };
