@@ -6,6 +6,7 @@ import bg1 from "../../assets/Component17.svg";
 import { Logo } from "../logo";
 import { DeviceSize } from "../responsive";
 import MobileNav from "./navbar/MobileNav";
+import { Link } from "react-router-dom";
 const navigation = [
   { name: "Home", href: "/" },
   { name: "Company", href: "./about" },
@@ -44,7 +45,9 @@ const TopSectiton = () => {
             A fun learning platform <Span>where anyone can contribute</Span>
           </Text>
         </TextContainer>
-        <Btn>get Started</Btn>
+        <Link to="/category">
+          <Btn>get Started</Btn>
+        </Link>
       </TextBtnContainer>
     </TopContainer>
   );
