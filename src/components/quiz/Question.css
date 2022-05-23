@@ -107,6 +107,7 @@
   justify-content: space-between;
 
   padding-top: 7%;
+  background: var(--secondary-color);
 }
 
 .select {
