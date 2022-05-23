@@ -93,7 +93,7 @@ const Quiz = () => {
       {question ? (
         <>
           <Quizinfo>
-            <Sound
+            {/* <Sound
               onClick={(e) => {
                 setVolume(!volume);
               }}
@@ -106,16 +106,17 @@ const Quiz = () => {
             </Sound>
             <CupScore>
               <img src={cup} height="15px" />
-            </CupScore>
+            </CupScore> */}
 
             {/* <div onClick={setVolume(!volume)}>
               {volume && <img src={volumeUP} height="25px" />}
               {!volume && <img src={volumeMute} height="25px" />}
             </div> */}
 
-            <div>
+            <p>
               Total: {currentQuestion}/{question.length}
-            </div>
+            </p>
+            <p>score :{score}</p>
           </Quizinfo>
           <Question />
         </>

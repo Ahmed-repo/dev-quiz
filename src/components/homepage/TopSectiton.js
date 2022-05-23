@@ -150,6 +150,7 @@ const Btn = styled.button`
 
   @media (max-height: 600px) {
     font-size: 2rem;
+    background: var(--main-bg);
   }
 `;
 
